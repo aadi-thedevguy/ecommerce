@@ -6,7 +6,7 @@ function Footer() {
     return (
         <Navbar style={{background: '#56CCF2'}}>
             <Navbar.Brand>
-                <h2 className='text-white'>The Generics</h2>
+                <h2 className='text-white ms-5' >The Generics</h2>
 
             </Navbar.Brand>
             <Container fluid className='d-flex justify-content-end'>
