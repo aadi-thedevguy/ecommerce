@@ -61,29 +61,25 @@ function App() {
       <div style={{ background: 'gray', height: '20vh' }} className='text-center mb-3'>
         <h1 className='text-white fs-1'>The Generics</h1>
       </div>
-      <Container>
+      <div className='mb-5 d-flex flex-column align-items-center justify-content-center'>
+        <h1>Music</h1>
+        <Container>
+          <Row md="2">
+            {
 
-        <h1 className='text-center'>Music</h1>
-      </Container>
-      <Container className='mx-auto mb-5 w-75'>
-        <Row lg={2}>
-          {
+              productsArr.map(item => (
+                <Col>
 
-            productsArr.map(item => (
-              <Col>
+                  <Album album={item} key={item.title} />
+                </Col>
+              ))
 
-                <Album album={item} key={item.title} />
-              </Col>
-            ))
-            
-            // console.log(productsArr[0])
-          }
-        </Row>
-        <div className='mx-auto'> 
-
+            }
+          </Row>
+        </Container>
         <Button variant="secondary">See the Cart</Button>
-        </div>
-      </Container>
+
+      </div>
       <Footer />
     </div>
   )
