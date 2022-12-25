@@ -43,6 +43,9 @@ function Navigation() {
             <NavLink to="/contact"  style={({ isActive }) =>
               isActive ? activeStyle : undefined
             }>Contact Us</NavLink>
+            <NavLink to="/login"  style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }>Login</NavLink>
         </Nav>
       </Container>
       <Navbar.Brand>

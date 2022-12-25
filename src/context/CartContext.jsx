@@ -6,6 +6,13 @@ const CartProvider = (props) => {
  
   const [cartItems, setcartItems] = useState([])
   const [quantity, setQuantity] = useState(0)
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+
+  const loginHandler = (token) => {
+    setToken(token);
+    localStorage.setItem('token',token)
+  };
 
   const addItemToCartHandler = (product, quantity) => {
 
@@ -26,7 +33,7 @@ const CartProvider = (props) => {
     }
   };
 
-  const removeItemFromCartHandler = (id) => {
+/*   const removeItemFromCartHandler = (id) => {
     const newcartItems = cartItems.filter(item => item.id !== id);
     let foundItem = cartItems.find((item) => item.id === id);
 
@@ -38,13 +45,14 @@ const CartProvider = (props) => {
       setcartItems(newcartItems);
     }
     
-  };
+  }; */
 
   const cartContext = {
     cartItems,
     totalAmount: 0,
     totalQty: quantity,
     addItem: addItemToCartHandler,
+    login : loginHandler
     // removeItem: removeItemFromCartHandler,
   };
 

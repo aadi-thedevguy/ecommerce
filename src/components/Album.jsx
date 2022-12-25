@@ -9,13 +9,14 @@ function Album({ album }) {
 
   const { addItem } = useContext(CartContext)
 
-  const onAdd = (e) => {
+  const onAdd = () => {
     addItem(album, album.quantity)
   }
 
   return (
+    <>
     <Link to={`/product/${album.id}`}>
-      <Card style={{ width: '18rem', marginBottom: '2rem' }}>
+      <Card style={{ maxWidth: '18rem', marginBottom: '2rem'}}>
         <Card.Img variant="top" src={album.imageUrl} />
         <Card.Body>
           <Card.Title>{album.title}</Card.Title>
@@ -27,6 +28,9 @@ function Album({ album }) {
 
       </Card>
     </Link>
+    
+    </>
+    
   )
 }
 
