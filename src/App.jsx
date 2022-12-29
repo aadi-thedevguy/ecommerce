@@ -12,12 +12,13 @@ import Login from './components/Login';
 
 function App() {
 
+
   return (
     <div className="App">
       <Navigation />
       <Routes>
       <Route path="/"  element={<Home />} />
-      <Route path="/store"  element={<Store />} />
+      <Route path="/store"  element={<Store /> } />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />

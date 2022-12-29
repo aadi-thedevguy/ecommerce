@@ -34,12 +34,12 @@ function Login() {
                 'Content-Type': 'application/json',
             },
         })
-            .then((res) => {
+            .then(res => {
                 setIsLoading(false);
                 if (res.ok) {
                     return res.json();
                 } else {
-                    return res.json().then((data) => {
+                    return res.json().then(data => {
                         let errorMessage = 'Authentication failed!';
 
                         throw new Error(errorMessage);
@@ -47,7 +47,7 @@ function Login() {
                 }
             })
             .then((data) => {
-                authCtx.login(data.idToken)
+                authCtx.login(data)
                 navigate('/store')
             })
             .catch((err) => {

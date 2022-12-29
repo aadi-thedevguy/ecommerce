@@ -14,23 +14,20 @@ function Album({ album }) {
   }
 
   return (
-    <>
-    <Link to={`/product/${album.id}`}>
-      <Card style={{ maxWidth: '18rem', marginBottom: '2rem'}}>
+    <Card style={{ maxWidth: '18rem', marginBottom: '2rem' }}>
+      <Link to={`/product/${album.id}`}>
         <Card.Img variant="top" src={album.imageUrl} />
-        <Card.Body>
-          <Card.Title>{album.title}</Card.Title>
-          <Card.Text>
-            ${album.price}
-          </Card.Text>
-          <Button variant="info" onClick={onAdd}>Add to Cart</Button>
-        </Card.Body>
+      </Link>
+      <Card.Body>
+        <Card.Title>{album.title}</Card.Title>
+        <Card.Text>
+          ${album.price}
+        </Card.Text>
+        <Button variant="info" onClick={onAdd}>Add to Cart</Button>
+      </Card.Body>
 
-      </Card>
-    </Link>
-    
-    </>
-    
+    </Card>
+
   )
 }
 

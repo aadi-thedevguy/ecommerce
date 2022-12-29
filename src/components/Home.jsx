@@ -52,7 +52,7 @@ function Home() {
       <h1 className='mb-5 mt-5'>TOURS</h1>
         {
           tours.map(tour => (
-            <ListGroup key={tour.date} variant="flush" horizontal>
+            <ListGroup key={tour.date} horizontal>
 
               <ListGroup.Item>{tour.date}</ListGroup.Item>
               <ListGroup.Item>{tour.venue}</ListGroup.Item>

@@ -1,59 +1,78 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 
 export const CartContext = createContext()
 
 const CartProvider = (props) => {
- 
+
+  const url = 'https://crudcrud.com/api/bbefa43013de4b02af686eb6fb04ac24/'
+
   const [cartItems, setcartItems] = useState([])
   const [quantity, setQuantity] = useState(0)
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
+  useEffect(() => {
+  getItems()
+  
+}, [])
 
-  const loginHandler = (token) => {
-    setToken(token);
-    localStorage.setItem('token',token)
+  const userEmail = user?.email?.replace(/\.|@/g, "")
+
+  const loginHandler = (user) => {
+    setUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
   };
 
-  const addItemToCartHandler = (product, quantity) => {
+  const getItems = async () => {
+    const res = await fetch(url + userEmail)
+    const data = await res.json()
+    setcartItems(data)
+  let quantity = 0
+  data.forEach(item => {
+    quantity = quantity + item.quantity
+  })
+  setQuantity(quantity)
+  }
 
-    setQuantity( prevQty => prevQty + quantity)
-    const checkProductInCart = cartItems.find((item) => item.id === product.id);
+  const addItemToCartHandler = async (product, quantity) => {
+    try {
 
-    if(checkProductInCart) {
-      const updatedcartItems = cartItems.map(item => {
-        if(item.id === product.id) return {
-            ...item,
-            quantity: item.quantity + quantity
-          }
-        })
-      setcartItems(updatedcartItems);
-    } else {
-      product.quantity = quantity
-      setcartItems([...cartItems, product ]);
+      const res = await fetch(url + userEmail, {
+        method: 'POST',
+        body: JSON.stringify(product),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await res.json()
+    } catch (error) {
+      console.error(error)
     }
-  };
-
-/*   const removeItemFromCartHandler = (id) => {
-    const newcartItems = cartItems.filter(item => item.id !== id);
-    let foundItem = cartItems.find((item) => item.id === id);
-
-    if (quantity > 0) setQuantity(prevQty => prevQty - 1)
-    if (foundItem.quantity > 1) {
-      setcartItems([...newcartItems, { ...foundItem, quantity: foundItem.quantity - 1 } ])
-    } else {
-
-      setcartItems(newcartItems);
-    }
+    getItems()
+    // setQuantity(prevQty => prevQty + quantity)
     
-  }; */
+    // const checkProductInCart = cartItems.find((item) => item.id === product.id)
+    // if (checkProductInCart) {
+    //   const updatedcartItems = cartItems.map(item => {
+    //     if (item.id === product.id) return {
+    //       ...item,
+    //       quantity: item.quantity + quantity
+    //     }
+    //   })
+    //   setcartItems(updatedcartItems);
+    // } else {
+    //   product.quantity = quantity
+    //   setcartItems([...cartItems, product]);
+    // }
+  };
+
 
   const cartContext = {
+    user,
     cartItems,
-    totalAmount: 0,
     totalQty: quantity,
     addItem: addItemToCartHandler,
-    login : loginHandler
-    // removeItem: removeItemFromCartHandler,
+    login: loginHandler,
+    getItems
   };
 
   return (

@@ -1,9 +1,21 @@
-
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Album from './Album';
 import { productsArr } from '../assets/data'
+import { CartContext } from '../context/CartContext';
 
 function Store() {
+
+  const { user } = useContext(CartContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+
+    if (!user) navigate('/login')
+  }, [])
+
+
   return (
     <>
 
@@ -15,14 +27,14 @@ function Store() {
         <div className='d-flex flex-wrap gap-3'>
           {
             productsArr.map(item => (
-                <Album album={item} key={item.title} />
-              ))
+              <Album album={item} key={item.title} />
+            ))
           }
         </div>
         <Button variant="secondary">See the Cart</Button>
       </div>
     </>
-      )
+  )
 }
 
-      export default Store
+export default Store
