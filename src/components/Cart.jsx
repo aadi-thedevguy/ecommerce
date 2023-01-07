@@ -1,4 +1,4 @@
-import { useContext,useEffect } from 'react'
+import { useContext } from 'react'
 import { Badge, Button, Figure, Stack } from 'react-bootstrap'
 import { CartContext } from '../context/CartContext'
 
@@ -14,8 +14,9 @@ function Cart() {
                 <h2>Quantity</h2>
 
             </Stack>
+            {cartItems.length === 0 && <p>Loading...</p>}
             {
-                cartItems.map(el => (
+                 cartItems.map(el => (
                     <Stack direction="horizontal" className='flex justify-content-between' key={el._id}>
 
                         <Figure className='d-flex flex-column'>
@@ -43,6 +44,7 @@ function Cart() {
                         </div>
                     </Stack>
                 ))
+                
             }
 
             {/* <h3><strong>Total : </strong> $00.00</h3> */}

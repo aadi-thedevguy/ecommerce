@@ -1,19 +1,14 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext } from 'react';
 
 export const CartContext = createContext()
 
 const CartProvider = (props) => {
 
-  const url = 'https://crudcrud.com/api/bbefa43013de4b02af686eb6fb04ac24/'
+  const url = 'https://crudcrud.com/api/98dce5cc2fbe42648437a94f4833a549/'
 
   const [cartItems, setcartItems] = useState([])
   const [quantity, setQuantity] = useState(0)
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-
-  useEffect(() => {
-  getItems()
-  
-}, [])
 
   const userEmail = user?.email?.replace(/\.|@/g, "")
 
