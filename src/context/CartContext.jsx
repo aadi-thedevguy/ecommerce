@@ -4,7 +4,7 @@ export const CartContext = createContext()
 
 const CartProvider = (props) => {
 
-  const url = 'https://crudcrud.com/api/98dce5cc2fbe42648437a94f4833a549/'
+  const url = 'https://crudcrud.com/api/a530cfac784549cbb865d2c0a92474d7/'
 
   const [cartItems, setcartItems] = useState([])
   const [quantity, setQuantity] = useState(0)
@@ -18,18 +18,22 @@ const CartProvider = (props) => {
   };
 
   const getItems = async () => {
-    const res = await fetch(url + userEmail)
-    const data = await res.json()
-    setcartItems(data)
-  let quantity = 0
-  data.forEach(item => {
-    quantity = quantity + item.quantity
-  })
-  setQuantity(quantity)
+    if (user && userEmail) {
+
+      const res = await fetch(url + userEmail)
+      const data = await res.json()
+      setcartItems(data)
+      let quantity = 0
+      data.forEach(item => {
+        quantity = quantity + item.quantity
+      })
+      setQuantity(quantity)
+    }
   }
 
   const addItemToCartHandler = async (product, quantity) => {
     try {
+
 
       const res = await fetch(url + userEmail, {
         method: 'POST',
@@ -44,7 +48,7 @@ const CartProvider = (props) => {
     }
     getItems()
     // setQuantity(prevQty => prevQty + quantity)
-    
+
     // const checkProductInCart = cartItems.find((item) => item.id === product.id)
     // if (checkProductInCart) {
     //   const updatedcartItems = cartItems.map(item => {
